@@ -1,0 +1,35 @@
+# EcoCidade — Portal de Gestão de Resíduos Sólidos Urbanos
+
+Projeto demonstrativo desenvolvido com HTML5, CSS3 (Flexbox) e JavaScript puro.
+
+## Como executar
+1. Extraia o arquivo ZIP.
+2. Abra a pasta `portal_rsu`.
+3. Abra `index.html` no navegador.
+
+Recomendado: VS Code + extensão Live Server para recarregamento automático.
+
+## Estrutura
+- `index.html`: estrutura das seções e formulários.
+- `css/estilo.css`: identidade visual, Flexbox e responsividade.
+- `js/app.js`: filtros, busca, formulários demonstrativos, geolocalização, indicadores e gráficos.
+
+## Importante antes de publicar
+Este é um protótipo front-end. Formulários não enviam nem armazenam dados; os pontos, CEPs e indicadores são exemplos fictícios/demonstrativos. A consulta por CEP precisa de integração com a base municipal de rotas. Os pedidos e denúncias exigem backend, validação, armazenamento seguro, controle de acesso e política de privacidade. MTR deve ser integrado aos sistemas oficiais aplicáveis. Substitua os links de documentos por arquivos oficiais.
+O mapa embutido é uma visualização de Porto Alegre, não um cadastro georreferenciado dos pontos listados. A geolocalização do navegador solicita permissão e não faz cálculo real de distância.
+A fonte Chart.js e as fontes Google são carregadas por CDN, exigindo conexão com a internet.
+
+
+ATUALIZAÇÃO VISUAL — ECOCIDADE
+- Paleta revisada: verde floresta, verde folha, verde sálvia e fundo off-white.
+- Cabeçalho e rodapé utilizam marca vetorial SVG em img/logo-ecocidade.svg.
+- Componentes com cantos mais suaves, sombras discretas, estados de foco e ajustes responsivos.
+- A marca SVG criada é provisória/original para esta versão. Para usar a logomarca oficial, substitua img/logo-ecocidade.svg pelo arquivo oficial mantendo o mesmo nome.
+
+\nAVALIAÇÃO DO CLIENTE
+- Abra feedback.html para o cliente avaliar a estrutura do portal.
+- Cada seção pode ser marcada como Manter, Modificar, Retirar ou Ampliar/adicionar.
+- O cliente pode escrever observações por seção e sugerir novos recursos.
+- "Salvar neste dispositivo" grava as respostas no navegador atual (localStorage).
+- "Baixar avaliação" exporta um arquivo JSON que pode ser enviado à equipe.
+- Para coletar avaliações automaticamente de clientes em diferentes dispositivos, será necessário integrar a página a um backend ou serviço de formulários.
