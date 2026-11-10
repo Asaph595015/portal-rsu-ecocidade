@@ -50,9 +50,9 @@ body{background:#f3f6ef}.review-header{background:#fff;border-bottom:1px solid #
 </div>
 </section>
 <label class="approval"><input type="checkbox" id="finalApproval"><span>Revisei minhas escolhas. Esta avaliação representa minha opinião sobre a estrutura e o conteúdo do projeto.</span></label>
-<div class="review-actions"><button class="btn btn-dark" type="button" id="exportBtn">Baixar avaliação <span>↓</span></button><button class="btn btn-outline" type="button" id="saveBtn">Salvar neste dispositivo</button><button class="btn btn-outline" type="button" id="clearBtn">Limpar respostas</button></div>
+<div class="review-actions"><button class="btn btn-dark" type="button" id="sendBtn">Enviar avaliação <span>→</span></button><a class="btn btn-lime" href="resultado.html" id="resultBtn">Ver resultado</a><button class="btn btn-outline" type="button" id="exportBtn">Baixar avaliação <span>↓</span></button><button class="btn btn-outline" type="button" id="saveBtn">Salvar neste dispositivo</button><button class="btn btn-outline" type="button" id="clearBtn">Limpar respostas</button></div>
 <p class="saved-status" id="savedStatus" aria-live="polite"></p>
-<p class="notice">A avaliação fica salva apenas neste navegador quando você usa “Salvar neste dispositivo”. O botão “Baixar avaliação” gera um arquivo JSON para encaminhar à equipe responsável. Para receber respostas automaticamente pela internet, será necessário conectar esta página a um servidor ou serviço de formulários.</p>
+<p class="notice">“Enviar avaliação” registra suas respostas no servidor do projeto, para que a equipe possa consultá-las. “Salvar neste dispositivo” guarda um rascunho apenas neste navegador e “Baixar avaliação” gera um arquivo JSON. O botão “Ver resultado” é restrito à equipe e pede senha.</p>
 </form>
 </div></main>
 <script src="js/feedback.js"></script>

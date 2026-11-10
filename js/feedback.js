@@ -40,3 +40,17 @@ document.querySelector("#saveBtn").addEventListener("click",()=>{localStorage.se
 document.querySelector("#exportBtn").addEventListener("click",()=>{const data=collect();const blob=new Blob([JSON.stringify(data,null,2)],{type:"application/json"});const url=URL.createObjectURL(blob);const a=document.createElement("a");a.href=url;a.download="avaliacao-cliente-ecocidade.json";a.click();URL.revokeObjectURL(url);document.querySelector("#savedStatus").textContent="Arquivo de avaliação gerado. Encaminhe-o à equipe do projeto."});
 document.querySelector("#clearBtn").addEventListener("click",()=>{if(!confirm("Deseja apagar todas as respostas desta avaliação?"))return;form.reset();localStorage.removeItem("ecocidadeClientReview");updateProgress();document.querySelector("#savedStatus").textContent="Respostas apagadas."});
 try{restore(JSON.parse(localStorage.getItem("ecocidadeClientReview")))}catch(e){console.warn("Não foi possível recuperar a avaliação salva.",e)}
+document.querySelector("#sendBtn").addEventListener("click",async()=>{
+const status=document.querySelector("#savedStatus"),btn=document.querySelector("#sendBtn");
+if(!document.querySelector("#finalApproval").checked){status.textContent="Marque a confirmação final antes de enviar.";return}
+const data=collect();
+if(!data.reviews.some(r=>r.decision!=="não avaliado")&&!data.newIdeas){status.textContent="Avalie ao menos uma seção ou escreva uma sugestão antes de enviar.";return}
+btn.disabled=true;status.textContent="Enviando...";
+try{
+const res=await fetch("/api/avaliacoes",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(data)});
+if(!res.ok)throw new Error((await res.json().catch(()=>({}))).erro||"Falha no envio");
+localStorage.removeItem("ecocidadeClientReview");
+status.textContent="Avaliação enviada com sucesso. Obrigado! Use “Ver resultado” para consultar os envios.";
+}catch(e){status.textContent="Não foi possível enviar agora ("+e.message+"). Use “Baixar avaliação” para guardar uma cópia e tente novamente.";}
+finally{btn.disabled=false}
+});
