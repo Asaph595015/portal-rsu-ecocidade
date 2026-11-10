@@ -1,35 +1,22 @@
-# EcoCidade — Portal de Gestão de Resíduos Sólidos Urbanos
+ECOCIDADE — PORTAL E AVALIAÇÃO DO CLIENTE
 
-Projeto demonstrativo desenvolvido com HTML5, CSS3 (Flexbox) e JavaScript puro.
+CORREÇÃO DE PUBLICAÇÃO E RELATÓRIO PDF
 
-## Como executar
-1. Extraia o arquivo ZIP.
-2. Abra a pasta `portal_rsu`.
-3. Abra `index.html` no navegador.
+1. O arquivo resultado.html consulta a API /api/avaliacoes. Essa rota existe no servidor Flask (server.py). Se o projeto for publicado como site estático no Netlify ou GitHub Pages, a rota retornará 404 porque esses serviços não executam o servidor Python.
+2. Para avaliações compartilhadas entre clientes e equipe, publique este projeto como serviço Web Python no Render. O arquivo render.yaml contém a configuração do serviço, comando gunicorn e disco persistente.
+3. No Render, crie o serviço usando o repositório que contém server.py, requirements.txt e render.yaml. Configure ADMIN_PASSWORD com uma senha forte. O disco persistente mantém as avaliações após novos deploys.
+4. Depois do deploy, teste https://SEU-DOMINIO/api/avaliacoes. Deve retornar [] se ainda não houver avaliações, ou uma lista JSON se houver envios. Não deve retornar 404.
+5. Cliente: https://SEU-DOMINIO/feedback.html
+6. Equipe/desenvolvedor: https://SEU-DOMINIO/resultado.html
 
-Recomendado: VS Code + extensão Live Server para recarregamento automático.
+EXPORTAÇÃO EM PDF
+Na página resultado.html, clique em “Exportar relatório em PDF”. O navegador abrirá a janela de impressão; selecione “Salvar como PDF” como destino. O relatório inclui o resumo, a visão por seção e as avaliações individuais.
 
-## Estrutura
-- `index.html`: estrutura das seções e formulários.
-- `css/estilo.css`: identidade visual, Flexbox e responsividade.
-- `js/app.js`: filtros, busca, formulários demonstrativos, geolocalização, indicadores e gráficos.
+OBSERVAÇÃO IMPORTANTE
+Os envios automáticos usam POST /api/avaliacoes e são armazenados no servidor. “Salvar neste dispositivo” continua sendo apenas um rascunho local no navegador do cliente.
 
-## Importante antes de publicar
-Este é um protótipo front-end. Formulários não enviam nem armazenam dados; os pontos, CEPs e indicadores são exemplos fictícios/demonstrativos. A consulta por CEP precisa de integração com a base municipal de rotas. Os pedidos e denúncias exigem backend, validação, armazenamento seguro, controle de acesso e política de privacidade. MTR deve ser integrado aos sistemas oficiais aplicáveis. Substitua os links de documentos por arquivos oficiais.
-O mapa embutido é uma visualização de Porto Alegre, não um cadastro georreferenciado dos pontos listados. A geolocalização do navegador solicita permissão e não faz cálculo real de distância.
-A fonte Chart.js e as fontes Google são carregadas por CDN, exigindo conexão com a internet.
-
-
-ATUALIZAÇÃO VISUAL — ECOCIDADE
-- Paleta revisada: verde floresta, verde folha, verde sálvia e fundo off-white.
-- Cabeçalho e rodapé utilizam marca vetorial SVG em img/logo-ecocidade.svg.
-- Componentes com cantos mais suaves, sombras discretas, estados de foco e ajustes responsivos.
-- A marca SVG criada é provisória/original para esta versão. Para usar a logomarca oficial, substitua img/logo-ecocidade.svg pelo arquivo oficial mantendo o mesmo nome.
-
-\nAVALIAÇÃO DO CLIENTE
-- Abra feedback.html para o cliente avaliar a estrutura do portal.
-- Cada seção pode ser marcada como Manter, Modificar, Retirar ou Ampliar/adicionar.
-- O cliente pode escrever observações por seção e sugerir novos recursos.
-- "Salvar neste dispositivo" grava as respostas no navegador atual (localStorage).
-- "Baixar avaliação" exporta um arquivo JSON que pode ser enviado à equipe.
-- Para coletar avaliações automaticamente de clientes em diferentes dispositivos, será necessário integrar a página a um backend ou serviço de formulários.
+ESTRUTURA PRINCIPAL
+- server.py: aplicação Flask e API de avaliações.
+- feedback.html / js/feedback.js: formulário do cliente.
+- resultado.html / js/resultado.js: painel da equipe e exportação em PDF via impressão do navegador.
+- render.yaml: configuração de publicação no Render.

@@ -8,10 +8,17 @@ function badge(d){return el("span","badge "+(CLASS[d]||"b-nao"),LABEL[d]||d)}
 function fmt(iso){try{return new Date(iso).toLocaleString("pt-BR")}catch(e){return iso}}
 
 async function carregar(){
-const res=await fetch("/api/avaliacoes");
-const body=await res.json().catch(()=>({}));
-if(!res.ok){const err=new Error(body.erro||"Erro ao carregar");err.status=res.status;throw err}
-dados=body;render();
+const res=await fetch("/api/avaliacoes", { headers: { "Accept": "application/json" } });
+const contentType = res.headers.get("content-type") || "";
+const body = contentType.includes("application/json") ? await res.json().catch(() => ({})) : {};
+if (!res.ok) {
+  const mensagem = res.status === 404
+    ? "A rota /api/avaliacoes não foi encontrada. O site provavelmente está publicado como página estática ou o serviço Flask não está iniciado. Publique o projeto como serviço Web Python no Render (gunicorn server:app)."
+    : (body.erro || `Erro HTTP ${res.status} ao carregar avaliações.`);
+  const err = new Error(mensagem); err.status = res.status; throw err;
+}
+if (!Array.isArray(body)) throw new Error("A API respondeu em formato inesperado. Verifique o servidor.");
+dados = body; render();
 }
 
 function render(){
@@ -70,7 +77,11 @@ if(res.ok)carregar().catch(e=>alert(e.message));else alert(res.status===401?"Sen
 }
 
 $("#refreshBtn").addEventListener("click",()=>carregar().catch(e=>alert(e.message)));
-$("#downloadBtn").addEventListener("click",()=>{
-const url=URL.createObjectURL(new Blob([JSON.stringify(dados,null,2)],{type:"application/json"}));
-const a=document.createElement("a");a.href=url;a.download="avaliacoes-ecocidade.json";a.click();URL.revokeObjectURL(url)});
-carregar().catch(e=>{$("#list").replaceChildren(el("p","rs-empty","Não foi possível carregar as avaliações: "+e.message))});
+$("#downloadBtn").addEventListener("click", () => {
+  if (!dados.length) { alert("Não há avaliações para exportar."); return; }
+  document.title = "Relatorio-avaliacoes-EcoCidade";
+  window.print();
+});
+carregar().catch(e => {
+  $("#list").replaceChildren(el("p", "rs-empty", "Não foi possível carregar as avaliações: " + e.message));
+});
