@@ -1,4 +1,3 @@
-const KEY="ecocidadeAdminPwd";
 const $=s=>document.querySelector(s);
 const LABEL={manter:"Manter",modificar:"Modificar",retirar:"Retirar",adicionar:"Ampliar / adicionar","não avaliado":"Não avaliado"};
 const CLASS={manter:"b-manter",modificar:"b-modificar",retirar:"b-retirar",adicionar:"b-adicionar","não avaliado":"b-nao"};
@@ -9,15 +8,13 @@ function badge(d){return el("span","badge "+(CLASS[d]||"b-nao"),LABEL[d]||d)}
 function fmt(iso){try{return new Date(iso).toLocaleString("pt-BR")}catch(e){return iso}}
 
 async function carregar(){
-const pwd=sessionStorage.getItem(KEY)||"";
-const res=await fetch("/api/avaliacoes",{headers:{"X-Admin-Password":pwd}});
+const res=await fetch("/api/avaliacoes");
 const body=await res.json().catch(()=>({}));
 if(!res.ok){const err=new Error(body.erro||"Erro ao carregar");err.status=res.status;throw err}
 dados=body;render();
 }
 
 function render(){
-$("#loginBox").classList.add("hidden");$("#panel").classList.remove("hidden");
 const sum=$("#summary");sum.replaceChildren();
 const list=$("#list");list.replaceChildren();
 if(!dados.length){list.append(el("p","rs-empty","Nenhuma avaliação enviada até agora."));return}
@@ -67,23 +64,13 @@ list.append(card);
 
 async function excluir(id){
 if(!confirm("Excluir esta avaliação definitivamente?"))return;
-const res=await fetch("/api/avaliacoes/"+encodeURIComponent(id),{method:"DELETE",headers:{"X-Admin-Password":sessionStorage.getItem(KEY)||""}});
-if(res.ok)carregar().catch(e=>alert(e.message));else alert("Não foi possível excluir.");
+const pwd=prompt("Senha da equipe para excluir:");if(!pwd)return;
+const res=await fetch("/api/avaliacoes/"+encodeURIComponent(id),{method:"DELETE",headers:{"X-Admin-Password":pwd}});
+if(res.ok)carregar().catch(e=>alert(e.message));else alert(res.status===401?"Senha incorreta.":"Não foi possível excluir.");
 }
 
-async function entrar(){
-sessionStorage.setItem(KEY,$("#pwd").value);
-$("#loginError").textContent="";
-try{await carregar()}catch(e){
-sessionStorage.removeItem(KEY);
-$("#loginError").textContent=e.status===401?"Senha incorreta.":e.message;
-}}
-
-$("#loginBtn").addEventListener("click",entrar);
-$("#pwd").addEventListener("keydown",e=>{if(e.key==="Enter")entrar()});
 $("#refreshBtn").addEventListener("click",()=>carregar().catch(e=>alert(e.message)));
-$("#logoutBtn").addEventListener("click",()=>{sessionStorage.removeItem(KEY);location.reload()});
 $("#downloadBtn").addEventListener("click",()=>{
 const url=URL.createObjectURL(new Blob([JSON.stringify(dados,null,2)],{type:"application/json"}));
 const a=document.createElement("a");a.href=url;a.download="avaliacoes-ecocidade.json";a.click();URL.revokeObjectURL(url)});
-if(sessionStorage.getItem(KEY))carregar().catch(()=>sessionStorage.removeItem(KEY));
+carregar().catch(e=>{$("#list").replaceChildren(el("p","rs-empty","Não foi possível carregar as avaliações: "+e.message))});

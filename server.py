@@ -1,7 +1,7 @@
 """EcoCidade - servidor do portal + API de avaliações do cliente.
 
 Variáveis de ambiente:
-  ADMIN_PASSWORD  (obrigatória) senha para ver/excluir avaliações em resultado.html
+  ADMIN_PASSWORD  (opcional)    senha pedida apenas para EXCLUIR avaliações (ver é livre)
   DATA_DIR        (opcional)    pasta onde salvar as avaliações (padrão: ./data)
 """
 import hmac
@@ -93,7 +93,6 @@ def enviar():
 
 @app.get("/api/avaliacoes")
 def listar():
-    exige_admin()
     with LOCK:
         lista = ler()
     return jsonify(sorted(lista, key=lambda x: x["submittedAt"], reverse=True))

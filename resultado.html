@@ -38,20 +38,14 @@ body{background:#f3f6ef}.rs-header{background:#fff;border-bottom:1px solid #e0e8
 </div></header>
 <main class="rs-main"><div class="container">
 <h1 class="rs-title">Resultado das avaliações</h1>
-<p class="rs-sub">Veja aqui tudo o que os clientes enviaram. Acesso restrito à equipe.</p>
+<p class="rs-sub">Veja aqui tudo o que os clientes enviaram. </p>
 
-<section class="rs-login" id="loginBox">
-<label for="pwd">Senha de acesso</label>
-<input type="password" id="pwd" autocomplete="current-password" placeholder="Digite a senha da equipe">
-<button class="btn btn-dark" id="loginBtn" type="button">Entrar</button>
-<p class="rs-error" id="loginError" aria-live="polite"></p>
-</section>
 
-<section id="panel" class="hidden">
+
+<section id="panel">
 <div class="rs-toolbar">
 <button class="btn btn-dark" id="refreshBtn" type="button">Atualizar</button>
 <button class="btn btn-outline" id="downloadBtn" type="button">Baixar tudo (JSON)</button>
-<button class="btn btn-outline" id="logoutBtn" type="button">Sair</button>
 </div>
 <div id="summary"></div>
 <div id="list"></div>
