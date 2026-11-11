@@ -4,23 +4,22 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Portal de gestão de resíduos sólidos urbanos, coleta seletiva e sustentabilidade.">
-  <title>EcoCidade | Gestão Inteligente de Resíduos</title>
+  <title>Ápice Serviços Ambientais | Gestão Inteligente de Resíduos</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" href="img/logo-apice.png">
   <link rel="stylesheet" href="css/estilo.css">
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
 <header class="topbar">
   <div class="container nav-wrap">
-    <a class="brand" href="#inicio" aria-label="EcoCidade início"><img class="brand-logo" src="img/logo-ecocidade.svg" alt="Logo EcoCidade"><span class="brand-name">eco<span class="brand-light">cidade</span><small>GESTÃO DE RESÍDUOS</small></span></a>
+    <a class="brand" href="#inicio" aria-label="Ápice Serviços Ambientais — início"><img class="brand-logo" src="img/logo-apice.png" alt="Ápice Serviços Ambientais"></a>
     <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">☰</button>
     <nav id="mainNav">
-      <a href="#inicio" class="active">Início</a><a href="#coleta">Coleta e pontos</a><a href="#descarte">Guia de descarte</a><a href="#transparencia">Transparência</a><a href="#empresas">Empresas</a>
+      <a href="#inicio" class="active">Início</a><a href="#coleta">Coleta e pontos</a><a href="#descarte">Guia de descarte</a><a href="#compliance">Compliance</a><a href="#empresas">Empresas</a>
     </nav>
     <div class="header-actions">
-      <a class="btn btn-outline" href="feedback.html">Avaliar projeto <span>✎</span></a>
       <a class="btn btn-outline header-report" href="#cidadao">Fazer solicitação <span>↗</span></a>
     </div>
   </div>
@@ -34,19 +33,9 @@
     <h1>O futuro que queremos<br>começa com o <em>descarte certo.</em></h1>
     <p>Encontre pontos de coleta, consulte os dias de recolhimento e descubra como dar o destino correto a cada resíduo.</p>
     <form class="hero-search" id="heroSearch"><span class="search-icon">⌕</span><input id="heroQuery" placeholder="O que você precisa descartar hoje?" aria-label="Pesquisar descarte"><button type="submit">Pesquisar <b>→</b></button></form>
-    <div class="hero-links"><a href="#coleta">⌖ Encontrar ponto de coleta</a><a href="#calendario">▦ Consultar calendário</a></div>
+    <div class="hero-links"><a href="#coleta">⌖ Encontrar ponto de coleta</a></div>
   </div>
   <div class="hero-stamp"><span>♻</span><strong>DESCARTE<br>CONSCIENTE</strong><small>UM HÁBITO QUE TRANSFORMA</small></div>
-</section>
-
-<section class="impact-section">
- <div class="container impact-grid">
-  <div class="impact-intro"><span class="eyebrow">NOSSO IMPACTO</span><h2>Pequenas atitudes.<br><em>Grandes resultados.</em></h2><p>Acompanhe os indicadores ambientais da nossa cidade.</p></div>
-  <article class="impact-card"><span class="impact-icon green">♻</span><strong class="counter" data-target="1284" data-suffix=" t">0</strong><span>Recicláveis coletados</span><small>▲ 12% em relação ao mês anterior</small></article>
-  <article class="impact-card"><span class="impact-icon blue">☁</span><strong class="counter" data-target="846" data-suffix=" t">0</strong><span>CO₂ equivalente evitado</span><small>Estimativa acumulada no ano</small></article>
-  <article class="impact-card"><span class="impact-icon orange">⌖</span><strong class="counter" data-target="37">0</strong><span>Pontos de entrega ativos</span><small>Em diferentes regiões da cidade</small></article>
- </div>
- <p class="container demo-note">* Indicadores ilustrativos para demonstração. Substituir por dados oficiais antes da publicação.</p>
 </section>
 
 <section class="section" id="coleta">
@@ -67,13 +56,6 @@
  </div>
 </section>
 
-<section class="calendar-band" id="calendario">
- <div class="container calendar-flex">
-  <div><span class="eyebrow light">COLETA NA SUA RUA</span><h2>Não perca o dia da <em>coleta.</em></h2><p>Informe seu CEP para consultar os dias e horários previstos.</p></div>
-  <form id="cepForm" class="cep-form"><label for="cep">Seu CEP</label><div><input id="cep" inputmode="numeric" maxlength="9" placeholder="00000-000" required><button class="btn btn-lime">Consultar →</button></div><small id="cepResult">Consulta demonstrativa. Integração com base municipal pendente.</small></form>
- </div>
-</section>
-
 <section class="section guide-section" id="descarte">
  <div class="container">
   <div class="section-heading"><div><span class="eyebrow">INFORMAÇÃO QUE TRANSFORMA</span><h2>Como descartar <em>corretamente?</em></h2><p>Pesquise um material ou navegue pelas categorias.</p></div></div>
@@ -86,14 +68,21 @@
  </div>
 </section>
 
-<section class="transparency-section" id="transparencia">
+<section class="section compliance-section" id="compliance">
  <div class="container">
-  <div class="section-heading"><div><span class="eyebrow light">DADOS ABERTOS</span><h2>Transparência que gera <em>confiança.</em></h2><p>Indicadores para acompanhar a gestão dos resíduos.</p></div><span class="data-pill">● PAINEL DEMONSTRATIVO</span></div>
-  <div class="charts-grid">
-   <article class="chart-card"><div class="chart-title"><div><strong>Destinação dos resíduos</strong><small>Distribuição percentual</small></div><span>2026</span></div><div class="chart-box"><canvas id="destinationChart" aria-label="Gráfico de destinação dos resíduos"></canvas></div><div class="chart-legend"><span><i class="dot d1"></i>Reciclagem 32%</span><span><i class="dot d2"></i>Aterro 58%</span><span><i class="dot d3"></i>Compostagem 10%</span></div></article>
-   <article class="chart-card"><div class="chart-title"><div><strong>Materiais recuperados</strong><small>Toneladas por trimestre</small></div><span>2026</span></div><div class="chart-box"><canvas id="recoveryChart" aria-label="Gráfico de materiais recuperados"></canvas></div></article>
+  <div class="section-heading"><div><span class="eyebrow">ÉTICA E INTEGRIDADE</span><h2>Compliance: compromisso com a <em>integridade.</em></h2><p>Atuamos com ética, transparência e responsabilidade, em conformidade com a legislação e as boas práticas de governança.</p></div></div>
+  <div class="compliance-intro">
+   <div class="compliance-text"><h3>Nosso compromisso</h3><p>A Ápice Serviços Ambientais estabelece seu Programa de Compliance e Integridade para consolidar uma cultura baseada na ética, na transparência, na responsabilidade socioambiental e na estrita observância da legislação vigente.</p><p>O Programa previne riscos de corrupção, fraude, conflitos de interesse, lavagem de dinheiro, práticas anticoncorrenciais, assédio e discriminação, e se aplica a sócios, administradores, colaboradores, fornecedores, subcontratados e parceiros.</p><p>Para nós, a integridade é um dos valores corporativos mais importantes: ela orienta como atuamos em todas as áreas da empresa.</p></div>
+   <div class="compliance-aims"><h3>Objetivos do Programa</h3><ul><li><strong>Prevenir</strong> governança, políticas, treinamento e due diligence de terceiros</li><li><strong>Detectar</strong> avaliação de riscos, auditoria e monitoramento</li><li><strong>Responder</strong> canais de consulta e denúncia, investigações e ações corretivas</li><li><strong>Avaliar</strong> a efetividade do Programa de forma contínua</li></ul></div>
   </div>
-  <div class="downloads"><div><strong>Documentos e relatórios</strong><p>Acesse documentos de planejamento e prestação de contas.</p></div><div class="download-links"><a href="#" class="doc-link" data-doc="Plano Municipal de Gestão Integrada de Resíduos Sólidos (PMGIRS)">↓ PMGIRS <small>PDF • publicar arquivo oficial</small></a><a href="#" class="doc-link" data-doc="Relatório de indicadores ambientais">↓ Indicadores ambientais <small>CSV • publicar arquivo oficial</small></a><a href="#" class="doc-link" data-doc="Relatório de custos de manejo">↓ Custos de manejo <small>PDF • publicar arquivo oficial</small></a></div></div>
+  <h3 class="compliance-sub">Os 12 pilares do Programa</h3>
+  <div class="pillar-grid"><article class="pillar-card"><span class="pillar-num">I</span><h3>Comprometimento da Alta Administração</h3><p>Liderança pelo exemplo, apoiando e promovendo a cultura de ética, integridade e conformidade.</p></article><article class="pillar-card"><span class="pillar-num">II</span><h3>Governança Corporativa</h3><p>Responsabilidades definidas, segregação de funções, transparência e prestação de contas.</p></article><article class="pillar-card"><span class="pillar-num">III</span><h3>Gestão de Riscos de Compliance</h3><p>Identificar, avaliar, classificar, monitorar e tratar riscos, com Matriz de Riscos revisada anualmente.</p></article><article class="pillar-card"><span class="pillar-num">IV</span><h3>Código de Ética e Políticas</h3><p>Regras claras de conduta: anticorrupção, conflito de interesses, brindes, proteção de dados e mais.</p></article><article class="pillar-card"><span class="pillar-num">V</span><h3>Controles Internos</h3><p>Alçadas de aprovação, rastreabilidade documental, conciliações, controles financeiros e auditorias.</p></article><article class="pillar-card"><span class="pillar-num">VI</span><h3>Due Diligence</h3><p>Avaliação de integridade de fornecedores, parceiros, representantes e subempreiteiros.</p></article><article class="pillar-card"><span class="pillar-num">VII</span><h3>Comunicação e Treinamento</h3><p>Capacitação permanente, campanhas educativas e materiais de conscientização.</p></article><article class="pillar-card"><span class="pillar-num">VIII</span><h3>Canal de Denúncias</h3><p>Canal seguro, confidencial e com proteção contra retaliação aos denunciantes de boa-fé.</p></article><article class="pillar-card"><span class="pillar-num">IX</span><h3>Investigações e Respostas</h3><p>Apuração estruturada, com imparcialidade, ampla defesa e medidas corretivas.</p></article><article class="pillar-card"><span class="pillar-num">X</span><h3>Monitoramento e Indicadores</h3><p>Auditorias, testes de controles e indicadores reportados à Alta Administração.</p></article><article class="pillar-card"><span class="pillar-num">XI</span><h3>Gestão de Consequências</h3><p>Medidas disciplinares proporcionais, imparciais e consistentes.</p></article><article class="pillar-card"><span class="pillar-num">XII</span><h3>Melhoria Contínua e Inovação</h3><p>Aperfeiçoamento constante conforme riscos, legislação e boas práticas.</p></article></div>
+  <div class="compliance-bottom">
+   <div class="compliance-box"><h3>Governança do Programa</h3><ul><li>Compliance Officer com independência funcional e acesso direto à Diretoria</li><li>Comitê de Compliance e Integridade (reuniões trimestrais)</li><li>Comitê de Ética e Integridade para casos envolvendo a Alta Administração</li><li>Modelo das Três Linhas de Defesa e Relatório Anual de Compliance</li></ul></div>
+   <div class="compliance-box"><h3>Segregação de funções em contratações públicas</h3><ul><li>Nenhum colaborador acumula elaboração, aprovação, execução, medição e faturamento</li><li>Toda medição passa por dupla validação</li><li>Alterações contratuais exigem parecer jurídico e de Compliance</li><li>Contratações emergenciais são previamente analisadas pelo Compliance</li></ul></div>
+   <div class="compliance-box canal" id="canal-denuncias"><h3>Canal de Denúncias</h3><p>Atendimento sigiloso, com possibilidade de anonimato, 24 horas por dia, 7 dias por semana. Garantimos apuração completa e discreta e proteção contra retaliação.</p><p class="canal-contact"><a href="mailto:apiceambiental@gmail.com">✉ apiceambiental@gmail.com</a><a href="https://wa.me/5513996569245" target="_blank" rel="noopener">☎ (13) 99656-9245 · WhatsApp</a></p><small>Exemplos: suborno e corrupção; assédio moral ou sexual; desvio de dinheiro ou equipamentos; fraudes; violações trabalhistas; violações das políticas internas.</small></div>
+  </div>
+  <p class="compliance-note">Programa de Compliance e Integridade — Ápice Serviços Ambientais Ltda · Agosto de 2026</p>
  </div>
 </section>
 
@@ -117,8 +106,8 @@
 </main>
 
 <footer class="footer">
- <div class="container footer-main"><div class="brand footer-brand"><img class="brand-logo" src="img/logo-ecocidade.svg" alt="Logo EcoCidade"><span class="brand-name">eco<span class="brand-light">cidade</span><small>GESTÃO DE RESÍDUOS</small></span></div><p>Informação, participação e responsabilidade compartilhada por uma cidade mais sustentável.</p><div class="footer-nav"><a href="#inicio">Início</a><a href="#coleta">Pontos de coleta</a><a href="#transparencia">Transparência</a><a href="#cidadao">Ouvidoria</a></div></div>
- <div class="container footer-bottom"><span>© 2026 EcoCidade • Projeto demonstrativo</span><span>Política de privacidade　|　Acessibilidade　|　Contato</span></div>
+ <div class="container footer-main"><div class="footer-brand"><img class="brand-logo footer-logo" src="img/logo-apice.png" alt="Ápice Serviços Ambientais"></div><p>Informação, participação e responsabilidade compartilhada por uma cidade mais sustentável.<br>Av. Miguel Sady, 428, sala D – São Cristóvão, Teresina/PI – CEP 64.052-320</p><div class="footer-nav"><a href="#inicio">Início</a><a href="#coleta">Pontos de coleta</a><a href="#compliance">Compliance</a><a href="#cidadao">Ouvidoria</a></div></div>
+ <div class="container footer-bottom"><span>© 2026 Ápice Serviços Ambientais Ltda • CNPJ 51.989.817/0001-75</span><span>Política de privacidade　|　Acessibilidade　|　Contato</span></div>
 </footer>
 
 <div class="modal" id="serviceModal" aria-hidden="true"><div class="modal-backdrop" data-close></div><div class="modal-box" role="dialog" aria-modal="true" aria-labelledby="modalTitle"><button class="modal-close" data-close aria-label="Fechar">×</button><span class="eyebrow">ÁREA DO CIDADÃO</span><h2 id="modalTitle">Solicitação</h2><p id="modalDescription">Preencha os dados para registrar sua solicitação.</p><form id="serviceForm"><div id="dynamicFields"></div><button class="btn btn-dark modal-submit" type="submit">Enviar solicitação →</button><small class="form-disclaimer">Demonstração: os dados não são enviados nem armazenados. É necessária integração com servidor para atendimento real.</small></form></div></div>

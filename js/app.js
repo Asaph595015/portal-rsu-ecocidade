@@ -44,8 +44,6 @@ $("#categoryRow").addEventListener("click",e=>{const b=e.target.closest("button[
 $("#menuToggle").addEventListener("click",()=>$("#mainNav").classList.toggle("open"));
 $("#mainNav").addEventListener("click",e=>{if(e.target.tagName==="A")$("#mainNav").classList.remove("open")});
 $("#locateBtn").addEventListener("click",()=>{const msg=$("#geoMessage");if(!navigator.geolocation){msg.textContent="Geolocalização não suportada neste navegador.";return}msg.textContent="Obtendo localização...";navigator.geolocation.getCurrentPosition(pos=>{const {latitude,longitude}=pos.coords;msg.textContent=`Localização identificada (${latitude.toFixed(3)}, ${longitude.toFixed(3)}). Consulte rotas nos pontos listados.`;showToast("Localização obtida. Os pontos demonstrativos ainda não são ordenados por distância.")},()=>{msg.textContent="Não foi possível acessar sua localização. Verifique a permissão do navegador."},{enableHighAccuracy:true,timeout:8000})});
-$("#cep").addEventListener("input",e=>{let v=e.target.value.replace(/\D/g,"").slice(0,8);if(v.length>5)v=v.slice(0,5)+"-"+v.slice(5);e.target.value=v});
-$("#cepForm").addEventListener("submit",e=>{e.preventDefault();const cep=$("#cep").value.replace(/\D/g,"");$("#cepResult").textContent=cep.length===8?"CEP recebido. Para exibir uma rota real, conecte este formulário à base de itinerários da prefeitura.":"Informe um CEP válido com 8 números."});
 const modal=$("#serviceModal");
 const templates={
  volumosos:{title:"Agendar coleta de volumosos",desc:"Informe os dados do endereço e os itens para retirada.",fields:[["Nome completo","text","Seu nome"],["CPF (opcional)","text","000.000.000-00"],["Endereço completo","text","Rua, número, bairro"],["CEP","text","00000-000"],["Itens para retirada","textarea","Descreva móveis, eletrodomésticos ou outros itens"],["Data preferencial","date",""]]},
@@ -57,11 +55,4 @@ document.querySelectorAll("[data-close]").forEach(b=>b.addEventListener("click",
 function closeModal(){modal.classList.remove("open");modal.setAttribute("aria-hidden","true")}
 $("#serviceForm").addEventListener("submit",e=>{e.preventDefault();closeModal();showToast("Formulário demonstrativo preenchido. Nenhum dado foi enviado.");e.target.reset()});
 $("#ecoInfo").addEventListener("click",()=>showToast("Exemplo: leve recicláveis a pontos participantes. Pontuação real depende de cadastro e validação."));
-document.querySelectorAll(".doc-link").forEach(a=>a.addEventListener("click",e=>{e.preventDefault();showToast("Adicione o documento oficial para habilitar este download: "+a.dataset.doc)}));
 let toastTimer;function showToast(message){const t=$("#toast");t.textContent=message;t.classList.add("show");clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove("show"),4000)}
-// Indicadores animados de demonstração
-const counters=document.querySelectorAll(".counter");const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting){const el=entry.target,target=+el.dataset.target,suffix=el.dataset.suffix||"";let n=0;const step=Math.max(1,Math.ceil(target/55));const timer=setInterval(()=>{n=Math.min(target,n+step);el.textContent=n.toLocaleString("pt-BR")+suffix;if(n>=target)clearInterval(timer)},22);observer.unobserve(el)}}),{threshold:.5});counters.forEach(c=>observer.observe(c));
-if(window.Chart){
- new Chart($("#destinationChart"),{type:"doughnut",data:{labels:["Reciclagem","Aterro","Compostagem"],datasets:[{data:[32,58,10],backgroundColor:["#3c9567","#b7c9b7","#e7bd67"],borderWidth:0,hoverOffset:5}]},options:{responsive:true,maintainAspectRatio:false,cutout:"68%",plugins:{legend:{display:false}}}});
- new Chart($("#recoveryChart"),{type:"bar",data:{labels:["1º tri","2º tri","3º tri","4º tri"],datasets:[{label:"Toneladas",data:[210,280,345,449],backgroundColor:"#6ba783",borderRadius:5,maxBarThickness:38}]},options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},scales:{x:{grid:{display:false},ticks:{font:{size:10}}},y:{beginAtZero:true,grid:{color:"#edf1ed"},ticks:{font:{size:9}}}}}});
-}
